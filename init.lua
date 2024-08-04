@@ -568,6 +568,10 @@ require('lazy').setup({
       --  - settings (table): Override the default settings passed when initializing the server.
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
       local servers = {
+        -- These are needed for proper vue work (especially import suggestions and stuff)
+        -- along with :TSInstall html; :TSInstall css; :TSInstall scss
+        html = {},
+        cssls = {},
         -- clangd = {},
         -- gopls = {},
         -- pyright = {},
@@ -580,6 +584,10 @@ require('lazy').setup({
         -- But for many setups, the LSP (`tsserver`) will work just fine
         tsserver = {},
         volar = {
+          -- Probably not needed
+          filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue', 'json' },
+          -- Crucial for code suggestions in vue <script>.
+          -- Enables ts work in vue files
           init_options = {
             vue = {
               hybridMode = false,
